@@ -1,7 +1,20 @@
+---
+title: "Community Ecology - Biodiversity indices and Visualisation"
+author: "Erin O'Rourke"
+date: "Nov 2024"
+subtitle: An introduction to calculating various Biodiversity indices using `vegan` and
+  creating visualisations of these patterns
+layout: tutorial
+---
+
 
 <center><img src="{{ site.baseurl }}/coding club logo.png" alt="Img"></center>
 
+{% capture callout %}
 This tutorial is aimed at those with a basic understanding of R and would like to further their skills specifically related to community ecology data. 
+{% endcapture %}
+{% include callout.html content=callout colour="important" %}
+
 
 In this tutorial, we will learn about various biodiversity matrices and how to calculate these using the `vegan` package. The key matrices we will cover are Shannons Diversity Index, Simpsons Index, Species 
 richness and Species evenness. We will then cover ways to visualise community data through simple boxplots,rank abundance curves followed by slightly more complex heat maps. Finally you can have a go with another data set to consolidate your learning. 
