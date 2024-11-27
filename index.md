@@ -3,9 +3,9 @@ By Erin O'Rourke
 Nov 2024
 ## An introduction to calculating various Biodiversity indices using `vegan` and creating visualisations of these patterns
 
-<div style="text-align: right;">
-    <img src="{{ site.baseurl }}/coding club logo.png" alt="Img">
-</div>
+<center>
+    <img src="{{ site.baseurl }}/coding club logo.png" alt="Img" style="float: right; margin-left: 10px; margin-bottom: 10px;">
+</center>
 
 <span style="background-color: yellow; color: black;">
 This tutorial is aimed at those with a basic understanding of R and would like to further their skills specifically related to community ecology data. </span>
