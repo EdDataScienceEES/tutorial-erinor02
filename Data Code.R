@@ -18,8 +18,11 @@ biodiversity_data <- as.data.frame(
 colnames(biodiversity_data) <- species
 rownames(biodiversity_data) <- c("Rocky shores", "Sandy shores", "Mudflats")
 
+# Convert all columns of the data frame to numeric
+biodiversity_data[] <- lapply(biodiversity_data, as.numeric)
+
 # View the data set
 print(biodiversity_data)
 
 #Save data set as csv
-write.csv(biodiversity_data, "biodiversity_data.csv", row.names = TRUE)
+write.csv(biodiversity_data, "biodiversity_data1.csv", row.names = TRUE)
