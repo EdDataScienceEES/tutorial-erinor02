@@ -1,35 +1,354 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/6eRt7-90)
-# tutorial-instructions
-## Instructions for Tutorial Assignment
+---
+title: "Community Ecology - Calculating Biodiversity Matrices"
+author: "Erin O'Rourke"
+date: "Nov 2024"
+subtitle: Tidying data, calculating various Biodiversity Matrices using vegan and
+  creating visualisations of these patterns
+layout: tutorial
+---
 
-The key final assignment for the Data Science course is to create your own tutorial. Your tutorial has to communicate a specific quantitative skill - you can choose the level at which you pitch your tutorial and how advanced or introductory it is. You can create "part 2" tutorials where "part 1" is an existing Coding Club tutorial.
+<center><img src="{{ site.baseurl }}/coding club logo.png" alt="Img"></center>
 
-You are encouraged to add your peers to your tutorial development repositories so that you can exchange feedback - remember that the best way to check if your tutorial makes sense is to have someone that is not you go through it.
+This tutorial is aimed at those with a basic understanding of R and would like to further their skills specifically related to community ecology data. 
 
-__Note that the deadline for this challenge is 12pm on 28th November 2024. Submission is via GitHub like with previous challenges, but you have to also submit a pdf version of your tutorial via Turnitin before 12pm on 28th November 2024. Your submission on GitHub will represent a repository that is also a website (the tutorial on making tutorials below explains how to turn a GitHub repo into a website) and you can just save a pdf of your website using `File/Export as pdf` when you've opened your repository website, you don't need to be separately generating a pdf through code unless you want to.__
+In this tutorial, we will learn about various biodiversity matrices and how to calculate these using the `vegan` package. The key matrices we will cover are Shannons Diversity Index, Simpsons Index, Species 
+richness and Species evenness. We will then cover ways to visualise community data through simple boxplots,rank abundance curves followed by slightly more complex heat maps. Finally you can have a go with another data set to consolidate your learning. 
 
-__Marking criteria:__
+### Tutorial Aims
 
-•	Topic – A relevant topic and content that is appropriate for a Coding Club tutorial and relevant to the field of data science, plus appropriate for learners at a particular skill level - at least 4th year Environmental / Ecological science student. - 25%
+#### <a href="#section1"> 1. Introduction to biodiversity indices and how to calculate them using `vegan`                             package </a>
+#### <a href="#section1.1">   1.1. Species Richness </a>
+#### <a href="#section1.2">   1.2. Shannon's Diversity Index </a>
+#### <a href="#section1.3">   1.3. Simpson's Index of Diversity  </a>
+#### <a href="#section1.4">   1.4. Species Evenness </a>
 
-•	Structure – Clear and logical structure to the tutorial that is easy to navigate with clear instructions. Clear, concrete and measurable learning objectives (i.e., people can tell exactly what they are learning and when they have achieved each learning objective). - 25%
+#### <a href="#section2"> 2. Simple ways of Visualising Community data </a>
+#### <a href="#section2.1">   2.1. Barplots </a>
+#### <a href="#section2.2">   2.2. Rank Abundance Curves </a>
 
-•	Reproducibility – People can do the tutorial on their own, without assistance and without needing to pay for extra software, the code works and people can easily access any data needed to complete the tutorial. - 25%
+#### <a href="#section3"> 3. More complex ways of visualising Community data</a>
+#### <a href="#section3.1">   3.1. Heatmaps </a>
 
-•	Creativity – A well-illustrated, professionally designed tutorial with appropriate figures and diagrams. A creative and engaging approach to teaching the learning objectives. - 25%
+#### <a href="#section4"> 6. Excersise: !!insert name of dataset!!</a>
 
-__Useful links:__
-- https://ourcodingclub.github.io/tutorials/tutorials/ - Coding Club tutorial on how to make tutorials
-- https://ourcodingclub.github.io/tutorials/ - all the other Coding Club tutorials
-- https://github.com/ourcodingclub/ourcodingclub.github.io - the repository behind the Coding Club website - here you can see the Markdown code for how the tutorials were formatted
-- https://rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf - markdown cheatsheet
+#### <a href="#section5"> 5. The End</a>
 
-__Absolute top of the class examples of tutorials made by DS students:__
-- https://ourcodingclub.github.io/tutorials/data-manip-creative-dplyr/ - Advanced data manipulation: Creative use of diverse dplyr functions by Jakub Wieczorkowski
-- https://ourcodingclub.github.io/tutorials/data-scaling/ - Transforming and scaling data by Matus Seci
-- https://ourcodingclub.github.io/tutorials/anova/ - ANOVA from A to (XY)Z by Erica Zaja
-- https://ourcodingclub.github.io/tutorials/spatial-vector-sf/ - Geospatial vector data in R with sf by Boyan Karabaliev
-- https://eddatascienceees.github.io/tutorial-assignment-beverlytan/ - Creating a repository with a clear structure by Beverly Tan
-- https://ourcodingclub.github.io/tutorials/spatial/ - Intro to Spatial Analysis in R by Maude Grenier
 
-All the other useful links we have shared with previous challenges and from the course reading - think of the tutorials you have done in the past - what did you like about those tutorials, what didn't work so well and could be improved.
+---------------------------
+
+<a name="section1"></a>
+
+## 1. Introduction to biodiversity indices and how to calculate them using `vegan` package
+
+Measuring Biodiversity is an important aspect of Community Ecology as it helps to understand ecosystem health and stability however it is a complex term which defines and includes: 
+ - the number of species present in the community, ecosystem or globally
+ - the evolutionary diversity represented by these species
+ - the diverse communities and ecosystems these species build
+ 
+As biological diversity is a complex term it can be measured in many different ways, one area often focused on is species diversity. The main methods we will use to assess species diversity are: 
+
+1 - Species Richness measures
+2 - General indices of species diversity: Shannon's Diversity Index, Simpsons Index of Diversity
+3 - Species Evenness measures 
+
+
+To begin we are going to Open `RStudio` and first create a **new script** by clicking on `File/New File/R Script`. Then we will fist download the packages that are required for this tutorial. 
+
+```r
+# Make sure to set the working directory
+setwd("your_filepath")
+
+#Load the following packages 
+library(vegan)
+library(ggplot2)
+library(dplyr)
+library(ggpubr)
+library(tidyr)
+library(viridis)
+
+#If you don't have these pacakges installed use the code below by removing the #
+#install.packages("vegan")
+#install.packages("ggplot2")
+#install.packages("dplyr")
+#install.packages("ggpubr")
+#install.packages("tidyr")
+#install.packages("viridis")
+
+```
+{% capture callout %}
+Many real community data sets are very complex and large containing many species, habitats and observations which can often make them harder to analyse so for the purpose of this tutorial I have created a more simple data set that can be downloaded from github. It was created in r and the code used to create the data can be found in the git hub data folder. 
+{% endcapture %}
+{% include callout.html content=callout colour="important" %}
+
+Then we will download the data set into r and check the column headings to ensure it has been correctly imported. 
+
+```r
+#Load the data
+data<-read.csv("biodiversity_data.csv")
+
+#Check the column headings of the data
+head(data)
+
+#To explore the data
+str(data)
+
+```
+
+From this we can see that the species columns are integers this may cause some issues down the line so we will convert them to numeric. 
+
+```r
+
+# Convert species columns to numeric
+data <- data %>%
+         mutate_at(c(2:21),as.numeric)
+
+# Now check the data again to see if they have been converted to numeric
+str(data)
+
+```
+
+
+<a name="section1.1"></a>
+
+### 1.1 Species Richness
+
+Species richness is the number of different species in a defined area and it is merely a numerical characteristic of a community. It doesn't incorporate the abundance of individual species found within the defined area or how evenly they are distributed. It is a simple measure that can useful to give an indication of the complexity of the ecosystem and it can be used to compare different communities. It is often expressed as S. 
+
+Species richness is the number of different species in a defined area and is calculated using `specnumber` in the `vegan` package. 
+
+```r
+#function used to calculate species richness
+species_richness <- specnumber(data)
+
+#print the result of Species Richness
+print(species_richness)
+
+```
+
+<center><img src="{{ site.baseurl }}/.png" alt="Img"></center>
+
+From the results of this we can see that species richness is relatively similar across all habitats with Sandy Shores having the lowest. 
+
+<a name="section1.2"></a>
+
+### 1.2 Shannon's Diversity Index
+
+There are several different species diversity indices that can be used. These indices are more complex and account for variation in both the number of species and the way that individuals within the community are distributed among species. These indices of diversity incorporate richness, commonness and rarity (evenness). 
+
+Shannon's Diversity Index accounts for richness and evenness and is caculated using the `diversity()` function. 
+
+```r
+
+#To use the `diversity()` function can only be calculated with numeric values so we will have to remove the first column that contains that habitat names
+index_data <- data[, -1]
+
+#Function used to calculate shannons diversity index
+shannon_index <- diversity(index_data, index = "shannon")
+
+#print the results of shannons diversity index
+print(shannon_index)
+```
+
+Shannons diversity index is interpreted as higher values indicate a greater diversity therefore we can see that the Rocky Shores habitat has the greatest diversity. 
+
+
+<a name="section1.3"></a>
+
+### 1.3 Simpson's Index of Diversity 
+
+Simpson's Index of Diversity focuses on the domanince or evenness and is also calculated with the `diversity()` function as follows. 
+
+```r
+
+#Calculate simpsons diversity 
+simpson_index <- diversity(index_data, index = "simpson")
+
+#print the results of Simpsons Index of Diversity
+print(simpson_index)
+
+```
+Based on the output we can see that values closer to 1 indicate a higher evenness showing that all of the habitats display a high evenness 
+
+
+<a name="section1.4"></a>
+
+###  1.4 Species Evenness
+
+Species Evenness quantifys how evenly individuals are distributed among species and is calculated using shannons diversity index and specis richness. 
+
+```r
+
+#Calculate Species Evenness
+evenness <- shannon_index / log(species_richness)
+
+#print the results of Species Evenness
+print(evenness)
+```
+from this we can see...
+
+
+We can now compile all of these diversity matrices in to one data frame to eaisly compare the results across habitats. 
+
+```r
+#compile the Diversity metrices into one data frame
+results <- data.frame(
+  Habitat=c("Rocky shores", "Sandy shores", "Mudflats"),
+  Shannon = shannon_index,
+  Simpson = simpson_index,
+  Richness = species_richness,
+  Evenness = evenness)
+#show the all of the results together
+print(results)
+```
+{% capture callout %}
+###TOP TIP: When to use what?
+As Shannons and Simpsons diversity indexs are calulateing someting simlar you wouldn't use them bothe on one dataset. To decide which one to use depnds on what you are wanting too look at in your data and also how big your sample size is. Simpsons diversity index is best used for studies placing most importance on changes in the number and relative abundance of abundant (I.e common) species and it requires decent sample size. Shannon's Diversity on the other hand is best used for studies placing most importance on changes in the number and relative abundance of rare species and is less sensitive to sample size.Therefore as we have a small sample size shannons diversity index is best suited for our data **The most important thing is to be consistant and use the same index through out your study.**
+{% endcapture %}
+{% include callout.html content=callout colour="alert" %}
+
+
+
+
+<a name="section2"></a>
+
+## 2. Simple ways of Visualising Community data
+
+viualistation is an important aspect of
+
+
+<a name="section2.1"></a>
+
+### 2.1. Barplots 
+
+
+First lets create a simple graph to display Shannons diversity Index. We will use base r to create a simple bar plot.
+
+```r
+barplot(shannon_index, names.arg = c("Rocky shores", "Sandy shores", "Mudflats"),
+        xlab = "Habitats", ylab = "Shannon's Index")
+```
+
+However this a very dull and unapealing graph to make it more more visuallly appealing we will use `ggplot2` as it eneables more freedom to create prettier graphs.
+
+```r
+(shannon_plot<-ggplot(results, aes(x=Habitat,y=Shannon,fill=Habitat)) + #Using the results data and indicating that we are using shannons index and that each habitat will be a different colour
+       geom_col() + 
+       labs(x = "Habitats", y = "Shannon's Index") + #Naming the x and y axis
+      scale_fill_brewer(palette = "Set2") +  # Use a color palette from RColorBrewer which is contained within `ggplot2`
+       theme_classic() +  #Set the theme of the graph to classic whcih makes it simple and easy to understand
+       theme(legend.position="none") + #Remove the legend as the names are under the bars
+         scale_y_continuous(limits = c(0, 3),                # Set the y-axis limits 
+                            breaks = seq(0, 3, by = 0.5)))     # Create breaks in the axis every 0.5
+```
+
+Now that looks a much nicer graph! You can customise this in any way you want and also use it to display the other results such as richness. 
+
+```r
+(richness_plot<- ggplot(results, aes(x=Habitat,y=Richness,fill=Habitat)) + #Using the results data and indicating that we are using Richness and that each habitat will be a different colour
+       geom_col() + 
+       labs(x = "Habitats", y = "Richness") + #Naming the x and y axis
+      scale_fill_brewer(palette = "Set1") +  # Use a color palette from RColorBrewer which is contained within `ggplot2`
+       theme_classic() +  #Set the theme of the graph to classic whcih makes it simple and easy to understand
+       theme(legend.position="none")) #Remove the legend as the names are under the bars
+```
+We can then arrange the plots so they sit nicely beside each other with the `ggarrange` function from the `ggpubr` package. 
+
+```r
+(combinded_plot<-ggarrange(shannon_plot, richness_plot,
+                          nrow=1,  
+                          ncol=2))
+
+```
+Another way to look at the data is though a stacked bar plot of the abundance of each species in each habitat. to do this we will first have to convert our data to a long format. 
+
+```r
+data_long <-data %>%
+  pivot_longer(cols = starts_with("Species"), 
+               names_to = "Species", 
+               values_to = "Abundance") %>%
+      rename(Habitat=X)
+
+# View the reshaped data
+print(data_long)
+
+```
+
+and then create the graph
+
+```r
+ggplot(data_long, aes(x = Habitat, y = Abundance, fill = Species)) +
+  geom_bar(stat = "identity") +  # Use bars to represent abundance
+  labs(x = "Habitats",
+       y = "Abundance") +
+  scale_fill_viridis(discrete = TRUE,option="plasma") +  # Use the viridis color palette
+  theme_minimal() +
+  theme(legend.title = element_blank())
+
+```
+
+<a name="section2.2"></a>
+
+### 2.2. Rank Abundance Curves
+
+Another way to display the data is through rank abundance curves
+
+```r
+
+# Create Rank Abundance Curve
+biodiversity_long <- biodiversity_long %>%
+  group_by(Habitat) %>%
+  arrange(Habitat, desc(Abundance), .by_group = TRUE) %>%
+  mutate(Rank = row_number())  # Rank species by abundance
+```
+Then we can plot the graph
+
+
+```r
+# Plot Rank Abundance Curve
+ggplot(biodiversity_long, aes(x = Rank, y = Abundance, color = Habitat, group = Habitat)) +
+  geom_line() +  # Line for each habitat
+  geom_point() +  # Points for each species
+  labs(title = "Rank Abundance Curve for Species Across Habitats",
+       x = "Rank of Species",
+       y = "Abundance") +
+  theme_minimal() +
+  theme(legend.title = element_blank())  # Remove legend title
+
+```
+
+
+
+<a name="section3"></a>
+
+## 3. More complex ways of visualising Community data
+
+
+
+
+<a name="section3.1"></a>
+
+
+### 3.1 Heatmaps
+
+
+First lets create a heat map
+```r
+heatmap(as.matrix(index_data))
+```
+This is very basic and not very informative to improve this we will add vaouious things to it 
+
+```r
+heatmap(as.matrix(index_data), Colv=NA, Rowv=NA, scale="row",col=cm.colors(50))
+```
+
+<a name="section4"></a>
+
+## 4. Excersise: !!insert name of dataset!!
+
+
+
+
+
+<a name="section5"></a>
+
+## 5. The End
