@@ -1,19 +1,15 @@
----
-title: "Community Ecology - Biodiversity indices and Visualisation"
-author: "Erin O'Rourke"
-date: "Nov 2024"
-subtitle: An introduction to calculating various Biodiversity indices using `vegan` and
-  creating visualisations of these patterns
-layout: tutorial
----
+# Community Ecology - Biodiversity indices and Visualisation"
+By Erin O'Rourke
+Nov 2024
+## An introduction to calculating various Biodiversity indices using `vegan` and creating visualisations of these patterns
 
+<div style="text-align: right;">
+    <img src="{{ site.baseurl }}/coding club logo.png" alt="Img">
+</div>
 
-<center><img src="{{ site.baseurl }}/coding club logo.png" alt="Img"></center>
+<span style="background-color: yellow; color: black;">
+This tutorial is aimed at those with a basic understanding of R and would like to further their skills specifically related to community ecology data. </span>
 
-{% capture callout %}
-This tutorial is aimed at those with a basic understanding of R and would like to further their skills specifically related to community ecology data. 
-{% endcapture %}
-{% include callout.html content=callout colour="important" %}
 
 
 In this tutorial, we will learn about various biodiversity matrices and how to calculate these using the `vegan` package. The key matrices we will cover are Shannons Diversity Index, Simpsons Index, Species 
