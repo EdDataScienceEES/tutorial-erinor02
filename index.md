@@ -67,10 +67,9 @@ library(viridis)
 #install.packages("viridis")
 
 ```
-{% capture callout %}
+
 Many real community data sets are very complex and large containing many species, habitats and observations which can often make them harder to analyse so for the purpose of this tutorial I have created a more simple data set that can be downloaded from github. It was created in r and the code used to create the data can be found in the git hub data folder. 
-{% endcapture %}
-{% include callout.html content=callout colour="important" %}
+
 
 Then we will download the data set into r and check the column headings to ensure it has been correctly imported. 
 
@@ -192,12 +191,9 @@ results <- data.frame(
 #show the all of the results together
 print(results)
 ```
-{% capture callout %}
+
 ###TOP TIP: When to use what?
 As Shannons and Simpsons diversity indexs are calulateing someting simlar you wouldn't use them bothe on one dataset. To decide which one to use depnds on what you are wanting too look at in your data and also how big your sample size is. Simpsons diversity index is best used for studies placing most importance on changes in the number and relative abundance of abundant (I.e common) species and it requires decent sample size. Shannon's Diversity on the other hand is best used for studies placing most importance on changes in the number and relative abundance of rare species and is less sensitive to sample size.Therefore as we have a small sample size shannons diversity index is best suited for our data **The most important thing is to be consistant and use the same index through out your study.**
-{% endcapture %}
-{% include callout.html content=callout colour="alert" %}
-
 
 
 
