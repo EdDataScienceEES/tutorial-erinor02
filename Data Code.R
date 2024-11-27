@@ -22,4 +22,4 @@ rownames(biodiversity_data) <- c("Rocky shores", "Sandy shores", "Mudflats")
 print(biodiversity_data)
 
 #Save data set as csv
-write.csv(biodiversity_data, "biodiversity_data.csv", row.names = FALSE)
+write.csv(biodiversity_data, "biodiversity_data.csv", row.names = TRUE)
