@@ -1,12 +1,3 @@
----
-title: "Community Ecology - Calculating Biodiversity Matrices"
-author: "Erin O'Rourke"
-date: "Nov 2024"
-subtitle: Tidying data, calculating various Biodiversity Matrices using vegan and
-  creating visualisations of these patterns
-layout: tutorial
-output: html
----
 
 <center><img src="{{ site.baseurl }}/coding club logo.png" alt="Img"></center>
 
