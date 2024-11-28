@@ -162,7 +162,7 @@ shannon_index <- diversity(index_data, index = "shannon")
 #print the results of shannons diversity index
 print(shannon_index)
 ```
-<center> <img src="{{ site.baseurl }}/figures/shannon_index.png" alt="Img" style="width: 800px;"/> </center>
+<center> <img src="{{ site.baseurl }}/figures/shannon_index.png" alt="Img" style="width: 400px;"/> </center>
 
 Shannons diversity index is interpreted as higher values indicate a greater diversity therefore we can see that the Mudflats habitat has the greatest diversity. 
 
@@ -183,7 +183,7 @@ simpson_index <- diversity(index_data, index = "simpson")
 #print the results of Simpsons Index of Diversity
 print(simpson_index)
 ```
-<center> <img src="{{ site.baseurl }}/figures/simpson_index.png" alt="Img" style="width: 800px;"/> </center>
+<center> <img src="{{ site.baseurl }}/figures/simpson_index.png" alt="Img" style="width: 400px;"/> </center>
 
 Based on the output we can see that values closer to 1 indicate a higher evenness showing Mudflats to have the highest.
 
@@ -205,7 +205,7 @@ evenness <- shannon_index / log(species_richness)
 print(evenness)
 ```
 
-<center> <img src="{{ site.baseurl }}/figures/evenness.png" alt="Img" style="width: 800px;"/> </center>
+<center> <img src="{{ site.baseurl }}/figures/evenness.png" alt="Img" style="width: 400px;"/> </center>
 
 From this we can again that the Mudflat habitat has the most evenly distrubution of species. 
 
@@ -231,10 +231,11 @@ View(results)
 
 
 
+<span style="background-color: lightgreen; color: black;">
 
 ### TOP TIP: When to use what?
 
-As Shannon's and Simpsons diversity index's are calculating something similar and you wouldn't use them both on one data set. To decide which one to use depends on what you are wanting to look at in your data and also how big your sample size is. Simpsons diversity index is best used for studies placing most importance on changes in the number and relative abundance of abundant (i.e common) species and it requires decent sample size. Shannon's Diversity on the other hand is best used for studies placing most importance on changes in the number and relative abundance of rare species and is less sensitive to sample size. Therefore as we have a small sample size shannon's diversity index is best suited for our data **The most important thing is to be consistent and use the same index throughout your study.**
+As Shannon's and Simpsons diversity index's are calculating something similar and you wouldn't use them both on one data set. To decide which one to use depends on what you are wanting to look at in your data and also how big your sample size is. Simpsons diversity index is best used for studies placing most importance on changes in the number and relative abundance of abundant (i.e common) species and it requires decent sample size. Shannon's Diversity on the other hand is best used for studies placing most importance on changes in the number and relative abundance of rare species and is less sensitive to sample size. Therefore as we have a small sample size shannon's diversity index is best suited for our data **The most important thing is to be consistent and use the same index throughout your study.** </span>
 
 
 
@@ -439,9 +440,11 @@ The data will first require some initial tidying before it can be analysed. Then
 
 ## 5. The End
 
-Here is a summary of the learning outcomes you will have hopefully met by going through this tutorial. 
+Here is a summary of the learning outcomes you will have hopefully met by completing this tutorial. 
+
 
 ###Learning Outcomes:
+
 
  - Effectively use the `vegan` package to calculate various biodiversity indices
  - Use `ggplot2` to create simple barplots to display the results of the biodiversity indices
@@ -449,5 +452,5 @@ Here is a summary of the learning outcomes you will have hopefully met by going 
  
  
 <span style="background-color: lightblue; color: black;">
-Well done for completing the tutorial! I hope you gained some skills to improve your data manipulation and can apply them to your own data problems.</span>
+Well done for completing the tutorial! I hope you gained some skills to improve your data manipulation and can apply them to your own data analysis.</span>
 
