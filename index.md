@@ -17,7 +17,7 @@ In this tutorial, we will learn about various biodiversity matrices and how to c
 
 ## Tutorial Aims
 
-#### <a href="#section1"> 1. Introduction to biodiversity indices and how to calculate them using `vegan`                             package </a>
+#### <a href="#section1"> 1. Introduction to biodiversity indices and how to calculate them using `vegan` package </a>
 ####      <a href="#section1.1">   1.1. Species Richness </a>
 ####      <a href="#section1.2">   1.2. Shannon's Diversity Index </a>
 ####      <a href="#section1.3">   1.3. Simpson's Index of Diversity  </a>
@@ -58,7 +58,7 @@ As biological diversity is a complex term it can be measured in many different w
 3 - Species Evenness measures 
 
 
-To begin we are going to Open `RStudio` and first create a **new script** by clicking on `File/New File/R Script`. Then we will fist download the packages that are required for this tutorial. 
+To begin we are going to open `RStudio` and first create a **new script** by clicking on `File/New File/R Script`. Then we will download the packages that are required for this tutorial. 
 
 ```r
 # Make sure to set the working directory
@@ -231,9 +231,8 @@ View(results)
 
 
 
-<span style="background-color: lightgreen; color: black;">
-
-### TOP TIP: When to use what?
+<span style="background-color: orange; color: black;">
+**TOP TIP: When to use what?**
 
 As Shannon's and Simpsons diversity index's are calculating something similar and you wouldn't use them both on one data set. To decide which one to use depends on what you are wanting to look at in your data and also how big your sample size is. Simpsons diversity index is best used for studies placing most importance on changes in the number and relative abundance of abundant (i.e common) species and it requires decent sample size. Shannon's Diversity on the other hand is best used for studies placing most importance on changes in the number and relative abundance of rare species and is less sensitive to sample size. Therefore as we have a small sample size shannon's diversity index is best suited for our data **The most important thing is to be consistent and use the same index throughout your study.** </span>
 
@@ -292,7 +291,7 @@ Now that looks a much nicer graph! You can customise this in any way you want an
 We can then arrange the plots so they sit nicely beside each other with the `ggarrange` function from the `ggpubr` package. 
 
 ```r
-#combine both of the plots in to one figure
+#combine both of the plots into one figure
 (combinded_plot <- ggarrange(shannon_plot, richness_plot, 
                           nrow=1,  
                           ncol=2))
@@ -443,8 +442,7 @@ The data will first require some initial tidying before it can be analysed. Then
 Here is a summary of the learning outcomes you will have hopefully met by completing this tutorial. 
 
 
-###Learning Outcomes:
-
+###Learning Outcomes
 
  - Effectively use the `vegan` package to calculate various biodiversity indices
  - Use `ggplot2` to create simple barplots to display the results of the biodiversity indices
