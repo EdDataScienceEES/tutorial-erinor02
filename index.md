@@ -6,7 +6,7 @@ Nov 2024
 
 ## An introduction to calculating various Biodiversity indices using `vegan` and creating visualisations of these patterns
 
-<center> <img src="{{ site.baseurl }}/figures/coding club logo.png" alt="Img" style="width: 200px;"/> </center>
+<center> <img src="/figures/coding club logo.png" alt="Img" style="width: 200px;"/> </center>
 
 
 <span style="background-color: lightblue; color: black;">
@@ -100,7 +100,7 @@ head(data)
 str(data)
 
 ```
-<center> <img src="{{ site.baseurl }}/figures/data.png" alt="Img" style="width: 800px;"/> </center>
+<center> <img src="/figures/data.png" alt="Img" style="width: 800px;"/> </center>
 
 From this we can see that the species columns are integers this may cause some issues down the line so we will convert them to numeric. 
 
@@ -114,7 +114,7 @@ data <- data %>%
 str(data)
 
 ```
-<center> <img src="{{ site.baseurl }}/figures/data_clean.png" alt="Img" style="width: 800px;"/> </center>
+<center> <img src="/figures/data_clean.png" alt="Img" style="width: 800px;"/> </center>
 
 
 As you can see the species columns are now numeric, we are now ready to move one to the next stage, biodiversity indicies.
@@ -137,7 +137,7 @@ species_richness <- specnumber(data)
 print(species_richness)
 
 ```
-<center> <img src="{{ site.baseurl }}/figures/species_richness.png" alt="Img" style="width: 400px;"/> </center>
+<center> <img src="/figures/species_richness.png" alt="Img" style="width: 400px;"/> </center>
 
 From the results of this we can see that species richness is varies across the habitats with Rocky shores having the lowest and mudflats having the highest. 
 
@@ -162,7 +162,7 @@ shannon_index <- diversity(index_data, index = "shannon")
 #print the results of shannons diversity index
 print(shannon_index)
 ```
-<center> <img src="{{ site.baseurl }}/figures/shannon_index.png" alt="Img" style="width: 400px;"/> </center>
+<center> <img src="/figures/shannon_index.png" alt="Img" style="width: 400px;"/> </center>
 
 Shannons diversity index is interpreted as higher values indicate a greater diversity therefore we can see that the Mudflats habitat has the greatest diversity. 
 
@@ -183,7 +183,7 @@ simpson_index <- diversity(index_data, index = "simpson")
 #print the results of Simpsons Index of Diversity
 print(simpson_index)
 ```
-<center> <img src="{{ site.baseurl }}/figures/simpson_index.png" alt="Img" style="width: 400px;"/> </center>
+<center> <img src="/figures/simpson_index.png" alt="Img" style="width: 400px;"/> </center>
 
 Based on the output we can see that values closer to 1 indicate a higher evenness showing Mudflats to have the highest.
 
@@ -205,7 +205,7 @@ evenness <- shannon_index / log(species_richness)
 print(evenness)
 ```
 
-<center> <img src="{{ site.baseurl }}/figures/evenness.png" alt="Img" style="width: 400px;"/> </center>
+<center> <img src="/figures/evenness.png" alt="Img" style="width: 400px;"/> </center>
 
 From this we can again that the Mudflat habitat has the most evenly distrubution of species. 
 
@@ -227,7 +227,7 @@ results <- data.frame(
 View(results)
 
 ```
-<center> <img src="{{ site.baseurl }}/figures/results.png" alt="Img" style="width: 800px;"/> </center>
+<center> <img src="/figures/results.png" alt="Img" style="width: 800px;"/> </center>
 
 
 
@@ -259,7 +259,7 @@ simple_plot <- barplot(shannon_index, names.arg = c("Rocky shores", "Sandy shore
         xlab = "Habitats", ylab = "Shannon's Index") # labeling the x and y axis
 
 ```
-<center> <img src="{{ site.baseurl }}/figures/simple_plot.png" alt="Img" style="width: 800px;"/> </center>
+<center> <img src="/figures/simple_plot.png" alt="Img" style="width: 800px;"/> </center>
 
 However this a very dull and unappealing graph to make it more more visually enticing we will use `ggplot2` as it enables more freedom to create more informative graphs.
 
@@ -274,7 +274,7 @@ However this a very dull and unappealing graph to make it more more visually ent
                             breaks = seq(0, 3, by = 0.5)))     # Create breaks in the axis every 0.5
                             
 ```
-<center> <img src="{{ site.baseurl }}/figures/shannon_plot.png" alt="Img" style="width: 800px;"/> </center>
+<center> <img src="/figures/shannon_plot.png" alt="Img" style="width: 800px;"/> </center>
 
 Now that looks a much nicer graph! You can customise this in any way you want and also use it to display the other results such as richness. 
 
@@ -286,7 +286,7 @@ Now that looks a much nicer graph! You can customise this in any way you want an
        theme_classic() +  #Set the theme of the graph to classic whcih makes it simple and easy to understand
        theme(legend.position="none")) #Remove the legend as the names are under the bars
 ```
-<center> <img src="{{ site.baseurl }}/figures/richness_plot.png" alt="Img" style="width: 800px;"/> </center>
+<center> <img src="/figures/richness_plot.png" alt="Img" style="width: 800px;"/> </center>
 
 We can then arrange the plots so they sit nicely beside each other with the `ggarrange` function from the `ggpubr` package. 
 
@@ -297,7 +297,7 @@ We can then arrange the plots so they sit nicely beside each other with the `gga
                           ncol=2))
 
 ```
-<center> <img src="{{ site.baseurl }}/figures/combined_plot.png" alt="Img" style="width: 800px;"/> </center>
+<center> <img src="/figures/combined_plot.png" alt="Img" style="width: 800px;"/> </center>
 
 Now we have a nice figure which displays both the shannon's diversity index and species richness of the habitats. 
 
@@ -328,7 +328,7 @@ data_long <-data %>%
 View(data_long)
 
 ```
-<center> <img src="{{ site.baseurl }}/figures/data_long.png" alt="Img" style="width: 800px;"/> </center>
+<center> <img src="/figures/data_long.png" alt="Img" style="width: 800px;"/> </center>
 
 Now you can see that the data is in long format with 3 columns, 1 for Habitat, 1 for Species and finally one for Abundance.
 
@@ -344,7 +344,7 @@ Then we will create the stacked bar graph using `ggplot2` and the `viridis` pack
   theme(legend.title = element_blank())) # removing the title from the legend
 
 ```
-<center> <img src="{{ site.baseurl }}/figures/stacked_plot.png" alt="Img" style="width: 800px;"/> </center>
+<center> <img src="/figures/stacked_plot.png" alt="Img" style="width: 800px;"/> </center>
 
 These graphs can be easier to interpret when there are fewer species but it gives a good indication of how the species are spread across the different habitats. 
 
@@ -377,7 +377,7 @@ Then we can plot this onto a graph using `ggplot2` package.
   theme(legend.title = element_blank(),legend.position="bottom"))  # Remove legend title and move legend to below the graph
 
 ```
-<center> <img src="{{ site.baseurl }}/figures/abundance_curve.png" alt="Img" style="width: 800px;"/> </center>
+<center> <img src="/figures/abundance_curve.png" alt="Img" style="width: 800px;"/> </center>
 
 From this we can see that Mudflats habitat has the highest abundance of common species and also the highest number of rare species.
 
@@ -396,7 +396,7 @@ First first we are going to create a simple heatmap using base r.
 simple_heatmap <- heatmap(as.matrix(index_data))  #to do so we have to convert the data to a matrix and we can only use data that is numeric therefore the index_data is used
 
 ```
-<center> <img src="{{ site.baseurl }}/figures/simple_heatmap.png" alt="Img" style="width: 800px;"/> </center>
+<center> <img src="/figures/simple_heatmap.png" alt="Img" style="width: 800px;"/> </center>
 
 This is very basic and some parts are not as useful based on our data. It is also not very informative as it is missing some key labels. We will now try to improve this and we will also use the `RColorBrewer` package to add colour to the heatmap.
 
@@ -411,7 +411,7 @@ scale="row", # Use 'scale' to normalise the data in the rows
 col = coul)   #adding the colour palette to the plot
 
 ```
-<center> <img src="{{ site.baseurl }}/figures/heatmap_plot.png" alt="Img" style="width: 800px;"/> </center>
+<center> <img src="/figures/heatmap_plot.png" alt="Img" style="width: 800px;"/> </center>
 
 
 
